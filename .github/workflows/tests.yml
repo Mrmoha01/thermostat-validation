@@ -1,0 +1,37 @@
+name: tests
+
+on: [push]
+
+jobs:
+  release:
+    name: firmware 1.0.0
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: pytest --fw 1.0.0 --html=reports/report-1.0.0.html --self-contained-html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report-1.0.0
+          path: reports/
+
+  release-candidate:
+    name: firmware 1.1.0-rc1 (expected to fail)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: pytest --fw 1.1.0-rc1 --html=reports/report-1.1.0-rc1.html --self-contained-html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report-1.1.0-rc1
+          path: reports/
