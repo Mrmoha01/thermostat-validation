@@ -1,6 +1,6 @@
 # Thermostat Validation
 
-![tests](https://github.com/<user>/<repo>/actions/workflows/tests.yml/badge.svg)
+![tests](https://github.com/Mrmoha01/thermostat-validation/actions/workflows/tests.yml/badge.svg)
 
 A simulated smart thermostat and a pytest suite that validates its firmware against
 written requirements. The simulator has two firmware versions: 1.0.0 (correct) and
